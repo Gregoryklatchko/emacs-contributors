@@ -1,0 +1,37 @@
+name: Analyze Emacs contributor countries
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests pandas geopy
+
+      - name: Analyze contributors
+        run: python analyze.py
+
+      - name: Upload CSV results
+        uses: actions/upload-artifact@v4
+        with:
+          name: emacs-contributor-country-results
+          path: |
+            contributors.csv
+            country_summary.csv
+          if-no-files-found: error
+          retention-days: 30
