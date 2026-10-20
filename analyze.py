@@ -4,7 +4,7 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 
-REPO = "emacs-mirror/emacs"
+REPO = "mathworks/Emacs-MATLAB-Mode"
 API = "https://api.github.com"
 HEADERS = {"Accept": "application/vnd.github+json"}
 if os.getenv("GITHUB_TOKEN"):
